@@ -42,6 +42,12 @@ pub enum UpdateKind {
     #[serde(rename = "chat_member_updated")]
     #[serde(skip)]
     ChatMemberUpdated,
+    #[serde(rename = "my_chat_member")]
+    #[serde(skip)]
+    MyChatMember,
+    #[serde(rename = "chat_member")]
+    #[serde(skip)]
+    ChatMember,
     #[doc(hidden)]
     Error(String),
     #[doc(hidden)]
