@@ -42,7 +42,7 @@ pub enum UpdateKind {
     #[serde(rename = "chat_member_updated")]
     ChatMemberUpdated,
     #[serde(rename = "my_chat_member")]
-    MyChatMember,
+    MyChatMember1(MyChatMember),
     #[serde(rename = "chat_member")]
     ChatMember,
     #[doc(hidden)]
