@@ -182,14 +182,14 @@ impl Api {
             tracing::trace!(
                 response = %match http_response.body {
                     Some(ref vec) => match std::str::from_utf8(vec) {
-                        Ok(str) => str,
+                        Ok(str) => {
+                            eprintln!("{:?}", str);
+                                    str},
                         Err(_) => "<invalid utf-8 string>"
                     },
                     None => "<empty body>",
                 }, "response received"
             );
-
-            eprintln!("{:?}", http_response);
 
             let response = Resp::deserialize(http_response).map_err(ErrorKind::from)?;
             tracing::trace!("response deserialized");
