@@ -84,7 +84,7 @@ impl Stream for UpdatesStream {
                     }
                     Poll::Ready(Err(err)) => {
                         tracing::error!(error = %err, "request error");
-                        Err(err)
+                        Ok(false)
                     }
                 }
             }
