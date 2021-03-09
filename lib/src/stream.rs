@@ -59,6 +59,7 @@ impl Stream for UpdatesStream {
             Some(ref mut current_request) => {
                 let cc = current_request.as_mut();
                 let polled_update = cc.poll(cx);
+
                 match polled_update {
                     Poll::Pending => {
                         tracing::trace!("request is pending");
@@ -84,7 +85,7 @@ impl Stream for UpdatesStream {
                     }
                     Poll::Ready(Err(err)) => {
                         tracing::error!(error = %err, "request error");
-                        Ok(false)
+                        Err(err)
                     }
                 }
             }

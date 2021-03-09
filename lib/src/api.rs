@@ -189,6 +189,8 @@ impl Api {
                 }, "response received"
             );
 
+            eprintln!("{:?}", http_response);
+
             let response = Resp::deserialize(http_response).map_err(ErrorKind::from)?;
             tracing::trace!("response deserialized");
             Ok(response)
