@@ -179,15 +179,6 @@ impl Api {
         async {
             tracing::trace!(name = %request.name(), body = %request.body, "sending request");
             let http_response = self.0.connector.request(&self.0.token, request).await?;
-            tracing::trace!(
-                response = %match http_response.body {
-                    Some(ref vec) => match std::str::from_utf8(vec) {
-                        Ok(str) => str,
-                        Err(_) => "<invalid utf-8 string>"
-                    },
-                    None => "<empty body>",
-                }, "response received"
-            );
 
             let response = Resp::deserialize(http_response).map_err(ErrorKind::from)?;
             tracing::trace!("response deserialized");
